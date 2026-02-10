@@ -1,37 +1,42 @@
-const { error } = require("console")
 const fs = require ("fs")
 
-// sync Blocking code , async Non Blocking code
-
-
 //*write
-fs.writeFileSync("./text.txt", "This is sync writing")
 
-fs.writeFile("./test.txt", "This is async writing", (err) => {
-    console.log(err)
-})   // async accepts callback, by any chance we get error we log it
+fs.writeFileSync("./text.txt","Hello this is sync code")
 
-//*read
+fs.writeFile("./test.txt","Hello this is async code",(err)=>{
+    if (err){
+        console.log(err)
+    }else {
+        console.log("File written successfully")
+    }
+})
 
-const res = fs.readFileSync("./text.txt", "utf-8")
+// The callback of fs.writeFile does NOT return res.
+
+//*read 
+
+const res = fs.readFileSync("./text.txt","utf-8")
 console.log(res)
 
-
-fs.readFile("./test.txt","utf8",(error,res) =>{
+fs.readFile("./test.txt","utf8",(error,res)=>{
     if (error){
         console.log(error)
-    }
-    else {
+    }else{
         console.log(res)
     }
 })
 
-//*update / append
+//*update/append
 
 fs.appendFileSync("./text.txt", new Date().toDateString())
 
+fs.appendFile("./test.txt", `Hello this is Shubham logged in at${new Date().toDateString()}\n`, (err)=>{
+    if(err){
+        console.log(err)
+    }else{
+        console.log("Log written successfully")
+    }
+})
 
-
-//*delete
-
-
+//*delete 
