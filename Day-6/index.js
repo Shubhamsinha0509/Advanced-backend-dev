@@ -44,6 +44,76 @@ app.get("/api/v1/users/:id",(req,res)=>{
     res.status(200).send(user)
 })
 
+// POST request (for sending data to the server)
+
+app.post("/api/v1/users",(req,res)=>{
+    const {name,email} = req.body
+
+    const newUser = {
+        id: data.length+1,
+        name,
+        email
+    }
+
+    data.push(newUser)
+
+    res.status(201).send({
+        message : "user created successfully",
+        data : newUser
+    })
+
+    res.status(201).send("Data has been added successfully")
+})
+
+// PUT request (update all fields)
+
+app.put("/api/v1/users/:id",(req,res)=>{
+    const {body} = req
+    const {id} = req.params
+
+    const parsedId = parseInt(id)
+    const userIndex = data.findIndex((user)=>user.id === parsedId)
+
+    if(userIndex === -1){
+       return res.status(404).send("User not found")
+    }
+
+    data[userIndex] = {
+        id : parsedId,
+        ...body
+    }
+
+    res.status(201).send({
+        message: "User updated",
+        data : data[userIndex]
+    })
+})
+
+
+// PATCH request (update specificvc field)
+
+app.patch("/api/v1/users/:id",(req,res)=>{
+    const {body} = req
+    const {id} = req.params
+
+    const parsedId = parseInt(id)
+    const userIndex = data.findIndex((user)=>user.id === parsedId)
+
+    if(userIndex === -1){
+       return res.status(404).send("User not found")
+    }
+
+    data[userIndex] = {
+        ...data[userIndex],...body
+    }
+
+    res.status(201).send({
+        message: "User updated",
+        data : data[userIndex]
+    })
+})
+
+
 app.listen(PORT,()=>{
     console.log(`server is running on http://localhost:${PORT}`)
 })
