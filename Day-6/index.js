@@ -117,3 +117,5 @@ app.patch("/api/v1/users/:id",(req,res)=>{
 app.listen(PORT,()=>{
     console.log(`server is running on http://localhost:${PORT}`)
 })
+
+// DELETE request
