@@ -10,5 +10,14 @@ const __dirname = path.dirname(__filename)
 // middleware to log all requests
 
 const logMiddleWare = (req, res, next)=>{
-    
+    const log = `[${new Date().toISOString()}]${req.method} ${req.url}\n`
+    const logFile = path.join(__dirname, "../logs/request.log")
+
+    fs.appendFile(logFile, log, (err)=>{
+        if(err) console.error(`failed to log request`, err)
+    })
+
+    next()
 }
+
+export default logMiddleWare

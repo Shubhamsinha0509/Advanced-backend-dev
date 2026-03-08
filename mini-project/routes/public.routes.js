@@ -1,11 +1,12 @@
 import express from "express"
+import { generateToken } from "../utils/token-utils.js"
 
 const publicRouter = express.Router()
 
 // Generate token 
 
 publicRouter.get("/generate-token",(req,res)=>{
-    const token = "token"
+    const token = generateToken()
 
     res.status(200).json({
         message : "token generated, please save it for future use",
