@@ -4,6 +4,7 @@ import session from "express-session"
 
 
 import authRoutes from "./routes/auth.routes.js"
+import taskRoutes from "./routes/task.routes.js"
 
 const app = express()
 
@@ -29,6 +30,7 @@ app.get("/",(req,res)=>{
 })
 
 app.use("/auth",authRoutes)
+app.use("/task",taskRoutes)
 
 app.listen(PORT,()=>{
     console.log(`server is running on http://localhost:${PORT}`)
